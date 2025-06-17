@@ -3,7 +3,7 @@
         <div class="mx-auto max-w-7xl">
             <div class="flex justify-end">
                 <div class="flex items-center gap-4">
-                    <template v-if="auth.user">
+                    <template v-if="user">
                         <Link
                             :href="route('logout')"
                             method="post"
@@ -34,7 +34,8 @@
 </template>
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
-// Access auth state from Inertia page props
-const { auth } = usePage().props;
+const page = usePage();
+const user = computed(() => page.props.auth.user);
 </script>
