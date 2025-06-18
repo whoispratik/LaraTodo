@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\CreateTodoAction;
 use App\Actions\DeleteTodoAction;
 use App\Actions\MarkTodoAction;
+use App\Actions\ReadTodoAction;
 use App\Actions\UpdateTodoAction;
 use App\Http\Requests\CreateTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
@@ -16,22 +17,10 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.]
      */
-    public function index(Request $request)
+    public function index(Request $request, ReadTodoAction $readTodoAction)
     {
         //
-        $query = $request->user()->todos();
-
-        if ($request->query('status') === 'completed') {
-            $query->completed();
-        } elseif ($request->query('status') === 'incomplete') {
-            $query->incomplete();
-        }
-
-        return inertia('Todo/Index',
-            [
-                'todos' => $query->get(),
-                'filter' => $request->query('status', 'all'),
-            ]);
+        return $readTodoAction->execute($request);
     }
 
     /**
