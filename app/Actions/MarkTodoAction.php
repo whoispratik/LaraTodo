@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions;
 
 use App\Models\Todo;
@@ -10,6 +11,7 @@ class MarkTodoAction
     {
         $todo->is_completed = $request->input('is_completed');
         $todo->save();
+
         return redirect()->route('todos.index');
     }
 }

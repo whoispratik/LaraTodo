@@ -12,19 +12,19 @@ class Todo extends Model
         'title',
         'is_completed',
         'due_date',
-        'user_id'
+        'user_id',
     ];
 
     protected $casts = [
         'is_completed' => 'boolean',
-        'due_date' => 'datetime:Y-m-d'
+        'due_date' => 'datetime:Y-m-d',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function scopeCompleted(Builder $query)
     {
         return $query->where('is_completed', true);

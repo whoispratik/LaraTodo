@@ -26,9 +26,9 @@ class CreateTodoRequest extends FormRequest
             //
             'title' => ['required', 'string', 'max:255'],
             'due_date' => ['date',
-            Rule::date()->afterOrEqual(now()),
-            'required'
-            ]
+                Rule::date()->afterOrEqual(now()),
+                'required',
+            ],
         ];
     }
 }

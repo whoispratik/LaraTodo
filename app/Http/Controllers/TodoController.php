@@ -19,7 +19,7 @@ class TodoController extends Controller
     public function index(Request $request)
     {
         //
-         $query = $request->user()->todos();
+        $query = $request->user()->todos();
 
         if ($request->query('status') === 'completed') {
             $query->completed();
@@ -28,9 +28,9 @@ class TodoController extends Controller
         }
 
         return inertia('Todo/Index',
-    [
-        'todos' => $query->get(), 
-        'filter' => $request->query('status', 'all'),
+            [
+                'todos' => $query->get(),
+                'filter' => $request->query('status', 'all'),
             ]);
     }
 
@@ -46,7 +46,7 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateTodoRequest $request,CreateTodoAction $createTodoAction)
+    public function store(CreateTodoRequest $request, CreateTodoAction $createTodoAction)
     {
         //
         return $createTodoAction->execute($request);
@@ -67,14 +67,14 @@ class TodoController extends Controller
     {
         //
         return inertia('Todo/Edit', [
-            'todo' => $todo
+            'todo' => $todo,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTodoRequest $request,  Todo $todo, UpdateTodoAction $updateTodoAction)
+    public function update(UpdateTodoRequest $request, Todo $todo, UpdateTodoAction $updateTodoAction)
     {
         //
         return $updateTodoAction->execute($request, $todo);
@@ -87,9 +87,10 @@ class TodoController extends Controller
     {
         return $deleteTodoAction->execute($todo);
     }
-    
+
     // Mark a todo as complete or incomplete
-    public function mark(Request $request, Todo $todo, MarkTodoAction $markTodoAction){
+    public function mark(Request $request, Todo $todo, MarkTodoAction $markTodoAction)
+    {
         return $markTodoAction->execute($request, $todo);
     }
 }
