@@ -15,12 +15,11 @@
         <!-- Simple Static Tabs -->
         <div class="border-b border-gray-700 mt-4">
           <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-            <a href="#" class="border-indigo-500 text-indigo-500 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">All</a>
-            <a href="#" class="text-gray-400 hover:text-gray-300 hover:border-gray-300 whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium">Completed</a>
-            <a href="#" class="text-gray-400 hover:text-gray-300 hover:border-gray-300 whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium">Incomplete</a>
+            <Link :href="route('todos.index')"  class="text-gray-400 hover:text-gray-300  hover:border-gray-300 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium" :class="{ 'border-indigo-500 text-indigo-500': filter === 'all' }">All</Link>
+            <Link :href="route('todos.index', { status: 'completed' })" class="text-gray-400 hover:text-gray-300 hover:border-gray-300 whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium" :class="{ 'border-indigo-500 text-indigo-500': filter === 'completed' }">Completed</Link>
+            <Link :href="route('todos.index', { status: 'incomplete' })" class="text-gray-400 hover:text-gray-300 hover:border-gray-300 whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium" :class="{ 'border-indigo-500 text-indigo-500': filter === 'incomplete' }">Incomplete</Link>
           </nav>
         </div>
-
         <div class="mt-8 flow-root">
           <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -87,5 +86,9 @@ import { Link, router } from '@inertiajs/vue3';
 
 const props = defineProps({
   todos: Array,
+  filter: {
+    type: String,
+    default: 'all',
+  }
 })
 </script>

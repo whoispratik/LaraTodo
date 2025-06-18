@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Todo extends Model
@@ -22,5 +23,15 @@ class Todo extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    public function scopeCompleted(Builder $query)
+    {
+        return $query->where('is_completed', true);
+    }
+
+    public function scopeIncomplete(Builder $query)
+    {
+        return $query->where('is_completed', false);
     }
 }
